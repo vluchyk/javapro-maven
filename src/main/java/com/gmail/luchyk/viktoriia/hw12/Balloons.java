@@ -9,21 +9,13 @@ public class Balloons {
 
         Map<Character, Integer> wordContents = new HashMap<>();
         for (Character letter : word.toCharArray()) {
-            if (wordContents.containsKey(letter)) { // TO-DO: create a method
-                wordContents.put(letter, wordContents.get(letter) + 1);
-            } else {
-                wordContents.put(letter, 1);
-            }
+            letterStatistics(wordContents, letter);
         }
 
         Map<Character, Integer> textContents = new HashMap<>();
         for (Character letter : text.toCharArray()) {
             if (wordContents.containsKey(letter)) {
-                if (textContents.containsKey(letter)) { // TO-DO: use a new created method
-                    textContents.put(letter, textContents.get(letter) + 1);
-                } else {
-                    textContents.put(letter, 1);
-                }
+                letterStatistics(textContents, letter);
             }
         }
 
@@ -36,14 +28,40 @@ public class Balloons {
                     if (wordContents.get(letter) * numberOfMatches > textContents.get(letter)) {
                         exit = true;
                         numberOfMatches--;
+                        break;
                     }
                 }
             }
         }
 
-        System.out.println(wordContents);
-        System.out.println(textContents);
+        /*
+        int numberOfMatches = 0;
+        if (wordContents.size() == textContents.size()) {
+            Character keyWithMinValue = Collections.min(textContents.entrySet(), Map.Entry.comparingByValue()).getKey();
+            numberOfMatches = textContents.get(keyWithMinValue) / wordContents.get(keyWithMinValue);
+            boolean exit = false;
+            while (!exit) {
+                int wrongCase = 0;
+                for (Character letter : wordContents.keySet()) {
+                    if (wordContents.get(letter) * numberOfMatches > textContents.get(letter)) {
+                        wrongCase++;
+                        numberOfMatches--;
+                        break;
+                    }
+                }
+                if (wrongCase == 0) exit = true;
+            }
+        }
+         */
 
         return numberOfMatches;
+    }
+
+    private void letterStatistics(Map<Character, Integer> contents, Character letter) {
+        if (contents.containsKey(letter)) {
+            contents.put(letter, contents.get(letter) + 1);
+        } else {
+            contents.put(letter, 1);
+        }
     }
 }

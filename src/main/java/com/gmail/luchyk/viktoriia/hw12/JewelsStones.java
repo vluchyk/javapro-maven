@@ -2,6 +2,10 @@ package com.gmail.luchyk.viktoriia.hw12;
 
 public class JewelsStones {
     public int numJewelsInStones(String jewels, String stones) {
+        if (jewels == null || stones == null) {
+            return 0;
+        }
+
         int result = 0;
         for (char stone : stones.toCharArray()) {
             if (jewels.indexOf(stone) != -1) result++;

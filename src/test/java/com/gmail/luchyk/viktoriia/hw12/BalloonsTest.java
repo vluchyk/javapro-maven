@@ -15,4 +15,34 @@ public class BalloonsTest {
 
         Assert.assertEquals(expected, result);
     }
+
+    @Test
+    public void maxNumberOfBalloonsNotExistTest() {
+        String text = "leonbalxballpeen";
+        int expected = 0;
+
+        int result = balloons.maxNumberOfBalloons(text);
+
+        Assert.assertEquals(expected, result);
+    }
+
+    @Test
+    public void maxNumberOfBalloonsInEmptyTextTest() {
+        String text = "";
+        int expected = 0;
+
+        int result = balloons.maxNumberOfBalloons(text);
+
+        Assert.assertEquals(expected, result);
+    }
+
+    @Test
+    public void maxNumberOfBalloonsInNullTextTest() {
+        String text = null;
+        int expected = 0;
+
+        int result = balloons.maxNumberOfBalloons(text);
+
+        Assert.assertEquals(expected, result);
+    }
 }

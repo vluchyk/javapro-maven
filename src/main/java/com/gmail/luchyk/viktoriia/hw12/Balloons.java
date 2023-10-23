@@ -4,11 +4,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Balloons {
+    private static final String WORD = "balloon";
     public int maxNumberOfBalloons(String text) {
-        String word = "balloon";
+        if (text == null) return 0;
 
         Map<Character, Integer> wordContents = new HashMap<>();
-        for (Character letter : word.toCharArray()) {
+        for (Character letter : WORD.toCharArray()) {
             letterStatistics(wordContents, letter);
         }
 

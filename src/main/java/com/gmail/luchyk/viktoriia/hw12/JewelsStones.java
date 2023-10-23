@@ -15,6 +15,10 @@ public class JewelsStones {
 
     /*
     public int numJewelsInStones(String jewels, String stones) {
+        if (jewels == null || stones == null) {
+            return 0;
+        }
+
         List<String> jewelsContents = new ArrayList<>();
         jewelsContents = List.of(jewels.split(""));
 
@@ -34,6 +38,10 @@ public class JewelsStones {
 
     /*
     public int numJewelsInStones(String jewels, String stones) {
+        if (jewels == null || stones == null) {
+            return 0;
+        }
+
         HashSet<Character> jewelsContents = new HashSet<>();
         for (Character jewel : jewels.toCharArray()) {
             jewelsContents.add(jewel);

@@ -29,7 +29,7 @@ public class JewelsStonesTest {
     }
 
     @Test
-    public void numJewelsInStonesIgnoreCaseTest() {
+    public void numJewelsInStonesDifferentRegisterTest() {
         String jewels = "BC";
         String stones = "aAAbbbbAaccaddA";
         int expected = 0;

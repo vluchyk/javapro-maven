@@ -6,6 +6,8 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum Message {
-    SERVER_STARTED("The server is running.");
+    SERVER_STARTED("The server is running."),
+    CLIENT_CONNECTED("The client is connected.");
+
     private String message;
 }

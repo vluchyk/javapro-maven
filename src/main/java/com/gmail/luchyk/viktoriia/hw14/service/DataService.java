@@ -61,7 +61,6 @@ public class DataService {
     }
 
     private boolean isWrong(String message) {
-//        List<String> wrongLetters = new ArrayList(List.of(new String[]{"ы", "ъ", "э", "ё"}));
         List<String> wrongLetters = Arrays.asList("ы", "ъ", "э", "ё");
         return wrongLetters.stream()
                 .anyMatch(letter -> message.contains(letter.toLowerCase()));

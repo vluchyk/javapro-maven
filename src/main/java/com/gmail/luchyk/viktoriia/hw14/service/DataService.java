@@ -23,11 +23,11 @@ public class DataService {
     private Socket socket;
 
     public void chart() {
-        try (
-                BufferedReader in = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
-                PrintWriter out = new PrintWriter(socket.getOutputStream(), true)) {
+        try (BufferedReader in = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
+             PrintWriter out = new PrintWriter(socket.getOutputStream(), true)) {
 
-            sendToClient(out, Message.SERVER_HELLO.getMessage());
+            System.out.println(Message.SERVER_HELLO.getMessage());
+            out.println(Message.SERVER_HELLO.getMessage());
 
             String receivedData;
             boolean verify = false;
@@ -35,15 +35,18 @@ public class DataService {
                 System.out.println("Client: " + receivedData);
 
                 if (verify && !Message.SERVER_QUESTION_ANSWER.getMessage().equalsIgnoreCase(receivedData)) break;
-                if (isWrong(receivedData)) {
+                if (containRussianLetters(receivedData)) {
                     verify = true;
-                    sendToClient(out, Message.SERVER_QUESTION.getMessage());
+                    System.out.println(Message.SERVER_QUESTION.getMessage());
+                    out.println(Message.SERVER_QUESTION.getMessage());
                 } else {
                     LocalDateTime now = LocalDateTime.now();
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm a");
                     String formatDateTime = now.format(formatter);
-                    sendToClient(out, formatDateTime);
-                    sendToClient(out, Message.SERVER_GOODBYE.getMessage());
+                    System.out.println(formatDateTime);
+                    out.println(formatDateTime);
+                    System.out.println(Message.SERVER_GOODBYE.getMessage());
+                    out.println(Message.SERVER_GOODBYE.getMessage());
                     break;
                 }
 
@@ -55,14 +58,9 @@ public class DataService {
         }
     }
 
-    private static void sendToClient(PrintWriter out, String message) {
-        System.out.println(message);
-        out.println(message);
-    }
-
-    private boolean isWrong(String message) {
-        List<String> wrongLetters = Arrays.asList("ы", "ъ", "э", "ё");
-        return wrongLetters.stream()
+    private boolean containRussianLetters(String message) {
+        List<String> russianLetters = Arrays.asList("ы", "ъ", "э", "ё");
+        return russianLetters.stream()
                 .anyMatch(letter -> message.contains(letter.toLowerCase()));
     }
 }
